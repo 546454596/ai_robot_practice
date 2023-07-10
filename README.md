@@ -48,7 +48,7 @@ roslaunch ranger_mini_gazebo ai_robot_ranger_gazebo.launch
 
 ​        <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_0)" />
 
-​    </include>`
+​ </include>`
 
 2.载入地图、启动定位：
 
