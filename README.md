@@ -12,7 +12,7 @@ mkdir -p ai_robot_ranger_mini/src
 
 ```
 cd ai_robot_ranger_mini/src
-gitclone git@github.com:546454596/ai_robot_practice_1.git
+git clone -b dev git@github.com:546454596/ai_robot_practice_1.git
 ```
 
 3.同样在src目录下，git clone **ai_robot_ranger_laser**（该包主要提供仿真场景、导航demo的launch文件、魔改的move_base等）
