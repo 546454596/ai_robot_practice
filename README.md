@@ -8,27 +8,34 @@
 mkdir -p ai_robot_ranger_mini/src
 ```
 
-2.将ai_robot_laser_core.zip放到src目录下，并解压缩
+2.进入src目录，并git clone **ai_robot_practice_1**（该包主要用于构建拓扑地图、实现导航等）：
 
-3.对于版本管理的包’ai_robot_ranger_laser’，在src目录下通过git clone下载：
+```
+cd ai_robot_ranger_mini/src
+gitclone git@github.com:546454596/ai_robot_practice_1.git
+```
+
+3.同样在src目录下，git clone **ai_robot_ranger_laser**（该包主要提供仿真场景、导航demo的launch文件、魔改的move_base等）
 
 ```
 git clone git@github.com:546454596/ai_robot_practice.git
 ```
 
-4.安装工作空间中包的依赖，首先切换到工作空间下：
+4.安装工作空间中包的依赖：
+
+（1）首先切换到工作空间下，
 
 ```
-cd ai_robot_ranger_mini
+cd ../
 ```
 
-5.运行下述命令安装该工作空间的所有依赖（如果没有rosdep，可参考http://wiki.ros.org/rosdep 安装）：
+（2）然后运行下述命令安装该工作空间的所有依赖（如果没有rosdep，可参考http://wiki.ros.org/rosdep 安装）：
 
 ```
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
-6.进行编译：
+5.进行编译（注意需要提前安装catkin-tools,参考https://blog.csdn.net/dzhongjie/article/details/83868684）：
 
 ```
 catkin build
