@@ -70,7 +70,7 @@ roslaunch ai_robot_navigation obsavoid.launch sim:=true
 
 **基于拓扑地图和TEB局部避障算法的使用流程**
 
-1.打开仿真场景（在ai_robot_ranger_gazebo.launch文件中，通过
+1.打开仿真场景：
 
 ```
 roslaunch ranger_mini_gazebo ai_robot_ranger_gazebo.launch
