@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="ranger_mini" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- Lidar sim -->
+ <!--link name="velodyne">
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-7" ixy="0.0" ixz="0.0" iyy="1e-7" iyz="0.0" izz="1e-7"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://ranger_mini_gazebo/description/meshes/velodyne_hdl32/velodyne_base.dae" />
+        </geometry>
+      </visual>
+  </link>
+  <gazebo reference="velodyne">
+    <sensor name="sensor_velodyne" type="ray">
+	<visualize>0</visualize>
+	<update_rate>10</update_rate>
+	<pose> 0 0 0 0 0 0 </pose>
+	<plugin name="ros_velodyne" filename="libgazebo_ros_velodyne_laser.so">
+          <topicName>/points</topicName>
+          <frameName>velodyne</frameName>
+	</plugin>
+	<ray>
+	  <scan>
+            <horizontal>
+            	<samples>100</samples>
+            	<resolution>1</resolution>
+            	<min_angle>-2.356194</min_angle>
+            	<max_angle>2.356194</max_angle>
+            </horizontal>
+            <vertical>
+            	<samples>16</samples>
+            	<resolution>1</resolution>
+            	<min_angle>-0.261799</min_angle>
+            	<max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>	  
+	  <range>
+          	<min>0.10</min>
+          	<max>20.0</max>
+          	<resolution>0.001</resolution>
+          </range>
+	</ray>
+    </sensor>
+  </gazebo>
+  <joint name="base_velodyne_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.21386 -0.0094087 0.581"/>
+    <parent link="base_link"/>
+    <child link="velodyne"/>
+  </joint-->
+
+
+
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin xyz="0.21386 -0.0094087 0.581" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+  </joint>
+
+  <link name="base_scan">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ranger_mini_gazebo/description/meshes/hokuyo/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  <gazebo reference="base_scan">
+    <sensor type="gpu_ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>810</samples>
+            <resolution>1</resolution>
+            <min_angle>-2.1</min_angle>
+            <max_angle>2.1</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>base_scan</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+  <!-- camera sim -->
+  <!--link name="right_cam_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ranger_mini_gazebo/description/meshes/xtion/asus_xtion_pro_camera.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="right_cam_link">
+    <sensor name="right_camera" type="camera">
+        <camera>
+          <horizontal_fov>2.09</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+	<pose> 0 0 0 0 0 0 </pose>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+	<plugin name='camera' filename='libgazebo_ros_camera.so'>
+        <cameraName>right_camera</cameraName>
+	<imageTopicName>/camera/right/image_raw</imageTopicName>
+            <CxPrime>320</CxPrime>
+	    <Cx>296.7347</Cx>
+	    <Cy>271.07618</Cy>
+	    <focalLength>481.1358</focalLength>
+	    <distortionK1>-0.39282</distortionK1>
+	    <distortionK2>0.14838</distortionK2>
+	    <distortionK3>-0.0058</distortionK3>
+	    <distortionT1>0.00101</distortionT1>
+	    <distortionT2>0.00000</distortionT2>>
+	</plugin> 
+      </sensor>
+  </gazebo>
+  <joint name="base_rightcam_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.2 -0.1 1"/>
+    <parent link="base_link"/>
+    <child link="right_cam_link"/>
+  </joint>
+
+  <link name="left_cam_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ranger_mini_gazebo/description/meshes/xtion/asus_xtion_pro_camera.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="left_cam_link">
+    <sensor name="left_camera" type="camera">
+        <camera>
+          <horizontal_fov>2.09</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+	<pose> 0 0 0 0 0 0 </pose>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+	<plugin name='camera' filename='libgazebo_ros_camera.so'>
+        <cameraName>left_camera</cameraName>
+	<imageTopicName>/camera/left/image_raw</imageTopicName>
+            <CxPrime>320</CxPrime>
+	    <Cx>296.7347</Cx>
+	    <Cy>271.07618</Cy>
+	    <focalLength>481.1358</focalLength>
+	    <distortionK1>-0.39282</distortionK1>
+	    <distortionK2>0.14838</distortionK2>
+	    <distortionK3>-0.0058</distortionK3>
+	    <distortionT1>0.00101</distortionT1>
+	    <distortionT2>0.00000</distortionT2>>
+	</plugin> 
+      </sensor>
+  </gazebo>
+  <joint name="base_leftcam_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.2 0.1 1"/>
+    <parent link="base_link"/>
+    <child link="left_cam_link"/>
+  </joint-->
+  
+  <!--link name="imu_link">
+    <inertial>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="imu_link">
+    <material value="Gazebo/Grey"/>
+    <sensor name='sensor_imu' type='imu'>
+	<always_on>true</always_on>
+	<update_rate>50.0</update_rate>
+	<pose> 0 0 0 0 0 0 </pose>
+	<plugin name='ros_imu' filename='libgazebo_ros_imu.so'>
+          <topicName>/imu</topicName>
+          <frameName>imu_link</frameName>
+	</plugin> 
+    </sensor>
+  </gazebo-->
+
+  <!-- IMU sim -->
+  <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>base_link</bodyName>
+      <topicName>/imu</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>50.0</updateRate>
+    </plugin>
+  </gazebo>
+
+  <!--kinect camera-->
+  <link name="kinect_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ranger_mini_gazebo/description/meshes/xtion/asus_xtion_pro_camera.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0" 
+                 izz="0.0001" />
+    </inertial>
+  </link>
+
+  <joint name="base_kinect_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.24376 -0.012728 0.475118"/>
+    <parent link="base_link"/>
+    <child link="kinect_link"/>
+  </joint>
+
+  <link name="camera_link_fake"/>
+  <joint name="camera_joint_fake" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+    <parent link="kinect_link"/>
+    <child link="camera_link_fake"/>
+  </joint>
+
+  <gazebo reference="kinect_link">
+   <sensor type="depth" name="kinect">
+    <alwaysOn>true</alwaysOn>
+    <updateRate>10</updateRate>
+    <camera>
+          <horizontal_fov>1.57</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>10.0</far>
+          </clip>
+    </camera>
+    <plugin name="kinect_controller" filename="libgazebo_ros_openni_kinect.so">
+      <baseline>0.2</baseline>
+      <cameraName>kinect_ir</cameraName>
+      <imageTopicName>/kinect/rgb/image_raw</imageTopicName>
+      <cameraInfoTopicName>/kinect/rgb/camera_info</cameraInfoTopicName>
+      <depthImageTopicName>/kinect/depth/image_raw</depthImageTopicName>
+      <depthImageInfoTopicName>/kinect/depth/camera_info</depthImageInfoTopicName>
+      <pointCloudTopicName>/kinect/depth/points</pointCloudTopicName>
+      <frameName>camera_link_fake</frameName>
+      <pointCloudCutoff>0.5</pointCloudCutoff>
+      <distortionK1>0.00000001</distortionK1>
+      <distortionK2>0.00000001</distortionK2>
+      <distortionK3>0.00000001</distortionK3>
+      <distortionT1>0.00000001</distortionT1>
+      <distortionT2>0.00000001</distortionT2>
+      <CxPrime>0</CxPrime>
+      <Cx>0</Cx>
+      <Cy>0</Cy>
+      <focalLength>0</focalLength>
+      <hackBaseline>0</hackBaseline>
+    </plugin>
+   </sensor>
+  </gazebo>
+</robot>

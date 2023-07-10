@@ -1,0 +1,7 @@
+<launch>
+  <node name="brain" pkg="move_base" type="ai_robot_modify" respawn="false" output="screen">
+    <remap from="base_scan" to="sensors/lidar/scan" /> 
+    <remap from="RosAria/cmd_vel" to="sim_p3at/cmd_vel" />
+    <!--remap from="RosAria/cmd_vel" to="cmd_vel" /-->
+  </node>
+</launch>

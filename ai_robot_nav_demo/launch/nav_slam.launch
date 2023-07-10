@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find nav_demo)/launch/path.launch" />
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find nav_demo)/rviz/default.rviz" />
+
+</launch> 

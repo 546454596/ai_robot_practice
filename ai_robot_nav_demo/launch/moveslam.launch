@@ -1,0 +1,7 @@
+<launch>
+	<include file="$(find nav_demo)/launch/slam_gmapping.launch" />
+	<include file="$(find nav_demo)/launch/path.launch" />
+	<arg name="map" default="mymap.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find nav_demo)/map/$(arg map)" />
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find nav_demo)/rviz/default.rviz" />
+</launch>

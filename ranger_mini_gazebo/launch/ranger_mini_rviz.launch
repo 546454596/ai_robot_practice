@@ -1,0 +1,9 @@
+<launch>
+  <arg name="map_file" default="$(find ranger_nav_demo)/map/mymap.yaml"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />    
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!-- 载入地图、amcl定位、rviz显示 -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" />
+    <include file="$(find ranger_nav_demo)/launch/amcl.launch" />
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ranger_nav_demo)/mycar_clean.rviz" />
+</launch>

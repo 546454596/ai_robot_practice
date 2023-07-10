@@ -1,0 +1,23 @@
+<launch>
+  <arg name="urdf" default="$(find ranger_mini_gazebo)/xacro/pioneer3at.urdf" />
+  <arg name="world_0" value="batclab.world" />
+  <arg name="world_1" value="corner.world" />
+  <arg name="world_2" value="corridor.world" />
+  <arg name="world_3" value="loop.world" />
+  <arg name="world_4" value="loop_with_corridor.world" />
+  <arg name="world_5" value="room.world" />
+  <arg name="world_6" value="room_with_corner.world" />
+      
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf)" />
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model pioneer3at_robot" />
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_0)" />
+    </include>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+</launch>
+
