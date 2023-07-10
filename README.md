@@ -45,8 +45,8 @@ roslaunch ranger_mini_gazebo ai_robot_ranger_gazebo.launch
 **注意**：通过在ai_robot_ranger_gazebo.launch文件中，修改下面**world0**即可更换仿真场景，world0是根据实验室场景构建，本次提供的版本只有world0下的拓扑地图，暂时还不支持其他word下的导航。但探索建图不实用图谱地图，所以在复现**explore_lite** 时，可以自由修改仿真world。 
 ```
 <include file="$(find gazebo_ros)/launch/empty_world.launch">
-​    <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_0)" />
-​</include>
+    <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_0)" />
+</include>
 ```
 
 2.载入地图、启动定位：
@@ -92,5 +92,4 @@ roslaunch ai_robot_nav_demo obs_avoid.launch
 ```
 roslaunch yocs_velocity_smoother standalone.launch
 ```
-
 
