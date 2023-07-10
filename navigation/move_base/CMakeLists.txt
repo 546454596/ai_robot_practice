@@ -31,7 +31,7 @@ find_package(catkin REQUIRED
         pcl_conversions
         pcl_ros
         
-        ai_robot_interface
+        ai_robot_interfaces
 )
 find_package(Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})

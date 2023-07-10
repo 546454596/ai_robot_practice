@@ -28,7 +28,7 @@
 #include "mavros_msgs/CommandBool.h"
 #include "mavros_msgs/CommandTOL.h"
 #include "mavros_msgs/OpticalFlowRad.h"
-#include "ai_robot_interface/set_destination.h"
+#include "ai_robot_interfaces/set_destination.h"
 
 #include "PIDController.h"
 #include "pid_fuzzy.h"
