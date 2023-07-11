@@ -35,10 +35,11 @@ cd ../
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
-5.进行编译（注意需要提前安装catkin-tools,参考https://blog.csdn.net/dzhongjie/article/details/83868684）：
+5.进行编译（注意需要提前安装catkin-tools,参考https://blog.csdn.net/dzhongjie/article/details/83868684），然后激活工作空间：
 
 ```
 catkin build
+source devel/setup.bash
 ```
 
 **基于拓扑地图和开发的导航模块的使用流程**
