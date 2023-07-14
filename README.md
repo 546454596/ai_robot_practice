@@ -65,7 +65,7 @@ roslaunch ranger_mini_gazebo ai_robot_ranger_gazebo.launch
 2.载入地图、启动定位：
 
 ```
-roslaunch ai_robot_nav_demo brainnav.launch
+roslaunch ai_robot_nav_demo brainnav.launch 
 ```
 
 3.启动全局规划
@@ -77,7 +77,7 @@ roslaunch ai_robot_navigation globalnav_sim.launch
 4.启动局部规划
 
 ```
-roslaunch ai_robot_navigation obsavoid.launch sim:=true
+roslaunch ai_robot_navigation obsavoid_sim.launch
 ```
 
 **基于拓扑地图和TEB局部避障算法的使用流程**
