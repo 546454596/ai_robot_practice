@@ -1,7 +1,7 @@
 <launch>
   <!-- move_base ai_robot_modify -->
   <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"-->
-  <node pkg="move_base" type="ai_robot_modify" respawn="false" name="move_base" output="screen">
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
     <remap from="cmd_vel" to="/sim_p3at/cmd_vel"/>
     <remap from="odom" to="sim_p3at/odom"/>
@@ -12,5 +12,5 @@
     <rosparam file="$(find ai_robot_nav_demo)/param/move_base_params.yaml" command="load" /> 
     <rosparam file="$(find ai_robot_nav_demo)/param/teb_local_planner_params.yaml" command="load" />
   </node>
-</launch>	
+</launch>		
 

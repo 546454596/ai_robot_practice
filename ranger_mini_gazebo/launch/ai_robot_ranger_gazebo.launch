@@ -13,7 +13,7 @@
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model pioneer3at_robot" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_0)" />
+        <arg name="world_name" value="$(find ranger_mini_gazebo)/worlds/$(arg world_5)" />
     </include>
 
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />

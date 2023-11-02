@@ -1,0 +1,19 @@
+<launch>
+    <arg name="move_base" default="false" />
+    <remap from="cmd_vel" to="/sim_p3at/cmd_vel"/>
+    <remap from="odom" to="sim_p3at/odom"/>   
+    <!-- 启动gazebo仿真环境 -->
+    <include file="$(find ranger_mini_gazebo)/launch/ai_robot_ranger_gazebo.launch" />
+    <!-- 启动gmapping建图 -->
+    <include file="$(find ai_robot_nav_demo)/launch/slam_gmapping.launch"/>    
+    <!-- 启动move_base节点进行全局路径规划 -->
+    <include file="$(find ai_robot_nav_demo)/launch/move_base.launch" />  
+    <!-- 启动局部避障 -->
+    <include file="$(find ai_robot_nav_demo)/launch/obs_avoid.launch" />
+    <!-- 启动速度平滑 -->
+    <include file="$(find yocs_velocity_smoother)/launch/standalone.launch" />
+    <!-- 启动rviz节点 -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ai_robot_nav_demo)/rviz/default.rviz"/>
+    <!-- 启动explore_lite自主探索 -->
+    <include file="$(find ai_robot_nav_demo)/launch/explore.launch" />   
+</launch>

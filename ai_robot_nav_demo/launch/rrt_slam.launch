@@ -1,0 +1,11 @@
+<launch>
+  <!-- 启动move_base节点 -->
+  <include file="$(find ai_robot_nav_demo)/launch/move_base_rrt.launch" />
+  <!-- 启动gmapping建图 -->
+  <include file="$(find ai_robot_nav_demo)/launch/slam_gmapping_rrt.launch"/>
+  <!-- 启动rviz节点 -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rrt_exploration)/simple.rviz">
+  </node>
+  <!-- 启动rrt -->
+  <!-- <include file="$(find ai_robot_nav_demo)/launch/simple.launch"/> -->
+</launch>

@@ -1,0 +1,4 @@
+<launch>
+    
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ai_robot_nav_demo)/rviz/default2.rviz"/>
+</launch>

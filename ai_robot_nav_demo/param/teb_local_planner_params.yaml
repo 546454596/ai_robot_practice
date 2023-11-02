@@ -44,12 +44,12 @@ TebLocalPlannerROS:
     vertices: [[-0.295, -0.25], [-0.295, 0.25], [0.295, 0.25], [0.295, -0.25]] # for type "polygon"
 
   # GoalTolerance
-  xy_goal_tolerance: 0.3
+  xy_goal_tolerance: 0.2
   yaw_goal_tolerance: 0.3
   free_goal_vel: False
 
   # Obstacles
-  min_obstacle_dist: 0.1 # minimum distance to obstacle: it depends on the footprint_model
+  min_obstacle_dist: 0.15 # minimum distance to obstacle: it depends on the footprint_model
   inflation_dist: 0.1 # greater than min_obstacle_dist to take effect
   include_costmap_obstacles: True # use the local costmap
   costmap_obstacles_behind_robot_dist: 1.0 # distance at which obstacles behind the robot are taken into account

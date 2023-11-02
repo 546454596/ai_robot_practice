@@ -1,0 +1,18 @@
+<launch>
+    <arg name="move_base" default="false" />
+    <remap from="cmd_vel" to="/sim_p3at/cmd_vel"/>
+    <remap from="odom" to="sim_p3at/odom"/>     
+    <!-- 启动SLAM节点自身定位 -->
+    <!-- <include file="$(find ai_robot_nav_demo)/launch/amcl.launch" /> -->
+    <!-- 运行导航节点 -->
+    <!-- <group if="$(arg move_base)"> -->
+    <include file="$(find ai_robot_nav_demo)/launch/move_base.launch" />
+    <!--node pkg="ai_robot_nav_demo" type="move_object" name="move_object" /-->
+    <!-- </group> -->
+    <!-- 运行gmapping建图 -->
+    <include file="$(find ai_robot_nav_demo)/launch/slam_gmapping.launch" />
+    <!-- 可以保存 rviz 配置并后期直接使用-->
+    <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ai_robot_nav_demo)/rviz/default.rviz"/> -->
+    <!-- 启动explore_costmap
+    <include file="$(find ai_robot_nav_demo)/launch/explore.launch" />    -->
+</launch>

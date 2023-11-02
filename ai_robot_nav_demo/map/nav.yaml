@@ -1,5 +1,5 @@
-image: /home/cx/brainnavi/catkin_ws/src/nav_demo/map/nav.pgm
-resolution: 0.05
+image: /home/asjklj/ai_robot_ranger_mini/src/ai_robot_practice/ai_robot_nav_demo/map/nav.pgm
+resolution: 0.050000
 origin: [-50.000000, -50.000000, 0.000000]
 negate: 0
 occupied_thresh: 0.65
